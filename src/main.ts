@@ -1,21 +1,23 @@
 import { PokeApiService } from "./services/PokeApiService.js";
 import { formatarPokemon, msgErro } from "./utils/textFormatters.js";
+import { BoxService } from "./services/BoxService.js";
 
 async function main(): Promise<void> {
   const api = new PokeApiService();
+  const box = new BoxService();
 
-  try {
-    const pikachu = await api.buscarPokemon("Pikachu");
-    console.log(formatarPokemon(pikachu));
-  } catch (erro) {
-    if (erro instanceof Error) console.log(msgErro(erro.message));
-  }
+  const pikachu = await api.buscarPokemon("pikachu");
 
-  try {
-    await api.buscarPokemon("pokemon-inexistente");
-  } catch (erro) {
-    if (erro instanceof Error) console.log(msgErro(erro.message));
-  }
+  console.log("Adicionar 1ª vez:", await box.adicionar(pikachu));
+  console.log("Adicionar 2ª vez:", await box.adicionar(pikachu));
+
+  const salvos = await box.listar();
+  salvos.forEach((p) => console.log(formatarPokemon(p)));
+
+  console.log("Remover ID 25:", await box.remover(25));
+  console.log("Remover ID 25 de novo:", await box.remover(25));
+
+  console.log("Total no box:", (await box.listar()).length);
 }
 
 main();
