@@ -109,21 +109,21 @@ package.json
 
 - **TypeScript e interface:** `PokemonApiResponse` foi aplicado para descrever o arquivo JSON que vem da API e `PokemonResumo` descreve o objeto simplificado que o programa usa depois de converter a resposta, indicando qual o formato dos dados e os tipando, o que faz o TypeScript avisar de erros ainda no editor, assim criando um autocomplete indicando os dados necessários durante o desenvolvimento.
 
-- **Fetch e async/await:** O fetch foi utilizado para realizar a requisiçao para a API,async torna a funçao assincrona , como o fetch nao recebe a resposta imediatamente ele retorna uma promise que seria como uma promessa de que vai ser entregue, o await é usado para esperar a promise terminar e entregar o resultado quando terminar, `Promise<PokemonResumo>` representa o que vai ser entregue , que no caso é o PokemonResumo.
+- **Fetch e async/await:** O fetch foi utilizado para realizar a requisiçao para a API,async torna a funçao assincrona , como o fetch nao recebe a resposta imediatamente ele retorna uma promise que seria como uma promessa de que vai ser entregue, o await é usado para esperar a promise terminar e entregar o resultado quando terminar, `Promise<PokemonResumo>` representa o que vai ser entregue , que no caso é o `PokemonResumo`.
 
 - **Tratamento de erros:** `APIError` foi implementado para tratar os erros customizados, relacionados a API , a vantagem é saber qual o tipo de problema aconteceu. `LocalBoxError` faz a mesma coisa porém trata os erros de armazenamento local. Quando um Pokémon nao existe (404) ou a rede falha, o `PokeApiService` lança um `APIError`, quando há problema com o arquivo o `BoxService` lança `LocalBoxError`. O `TerminalController` captura esses erros no try/catch e exibe a mensagem [ERRO].
 
-- **Métodos de array:** O map foi utilizado em PokeApiService quando a API devolve a informaçao como uma lista de objetos o map percorre essa lista criando um novo array com os nomes em string. Já o obterStat devolve os atributos stats da lista , e o find foi usado para encontrar o item por nome, hp,attack ou defense.
-  Em BoxService o some foi utilizado para verificar se um elemento atende a condiçao , como verificar se o Pokémon ja existe , assim quando usar adicionar ele impede o duplicado e no remover confirma que o pokémon existe antes de remover. Ainda em boxService foi utilizado o filter para criar um novo array apenas com os elementos que atendem a condiçao como um filtro.
-  Em TerminalController foi utilizado o forEach para percorrer o cátalogo de Pokémon e imprimir cada Pokémon no terminal,sem criar um novo array. O reduce foi utilizado para somar o peso de todos os Pokémons do catálogo em um unico número o peso somado, a funcao dele é transformar vários elementos em um unico resultado.
+- **Métodos de array:** O map foi utilizado em `PokeApiService` quando a API devolve a informaçao como uma lista de objetos o map percorre essa lista criando um novo array com os nomes em string. Já o obterStat devolve os atributos stats da lista , e o find foi usado para encontrar o item por nome, hp,attack ou defense.
+  Em `BoxService` o some foi utilizado para verificar se um elemento atende a condiçao , como verificar se o Pokémon ja existe , assim quando usar adicionar ele impede o duplicado e no remover confirma que o pokémon existe antes de remover. Ainda em boxService foi utilizado o filter para criar um novo array apenas com os elementos que atendem a condiçao como um filtro.
+  Em `TerminalController` foi utilizado o forEach para percorrer o cátalogo de Pokémon e imprimir cada Pokémon no terminal,sem criar um novo array. O reduce foi utilizado para somar o peso de todos os Pokémons do catálogo em um unico número o peso somado, a funcao dele é transformar vários elementos em um unico resultado.
 
 - **Classes:**
 
-`PokeApiService:` Essa camada usa o fetch para consultar a PokeAPI,trata o erro de pokemon inexistente e falhas de rede, simplificando a resposta da API no objeto PokemonResumo.
-`BoxService:` É a camada de persistência, ler e gravar as informaçoes adicionadas em pc_box.json, bloqueando duplicados pelo id e remover pelo id e lista o que está salvo.
-TerminalController: É a camada de interface, mostra o menu , é onde o usuario informa a opçao e ela chama os services e exibe as mensagens [OK],[AVISO] e [ERRO].
+`PokeApiService:` Essa camada usa o fetch para consultar a `PokeAPI`,trata o erro de pokemon inexistente e falhas de rede, simplificando a resposta da API no objeto `PokemonResumo`.
+`BoxService:` É a camada de persistência, ler e gravar as informaçoes adicionadas em `pc_box.json`, bloqueando duplicados pelo id e remover pelo id e lista o que está salvo.
+`TerminalController`: É a camada de interface, mostra o menu , é onde o usuario informa a opçao e ela chama os services e exibe as mensagens [OK],[AVISO] e [ERRO].
 
-O atributo private foi utilizado para encapsular o que é interno da classe, como caminhoArquivo no (BoxService) e baseUrl no (PokeApiService), nenhuma outra parte do programa precisa mexer neles.Métodos como salvar, mapearResposta e obterStat sao auxiliares, só existem para os métodos publicos funcionarem. Assim quem usa a classe so enxerga o essencial(listar,adicionar,remover,buscarPokemon).
+O atributo private foi utilizado para encapsular o que é interno da classe, como `caminhoArquivo` no (BoxService) e `baseUrl` no (PokeApiService), nenhuma outra parte do programa precisa mexer neles.Métodos como salvar, mapearResposta e obterStat sao auxiliares, só existem para os métodos publicos funcionarem. Assim quem usa a classe so enxerga o essencial(listar,adicionar,remover,buscarPokemon).
 
 O `TerminalController` recebe o `PokeApiService` e o `BoxService` pelo construtor ao invés de criá-los dentro dele. Isso se chama injeção de dependências, e quem cria e entrega os objetos é o `main.ts`. Assim as classes ficam separadas podendo alterar ou trocar peças sem mexer nas outras.
 
@@ -140,7 +140,7 @@ Link do Kanban: https://github.com/users/devMcouto/projects/1/views/1
 
 ## Vídeo de apresentação
 
-COLE_AQUI_O_LINK_DO_VIDEO
+https://drive.google.com/file/d/1UKNUCkrHDTZn_p-FTpXtlxyoxG79v3dB/view?usp=sharing
 
 ## Melhorias futuras
 
